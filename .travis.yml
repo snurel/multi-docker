@@ -16,6 +16,7 @@ after_success:
   - docker build -t fikircik/multi-docker-server ./server
   - docker build -t fikircik/multi-docker-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #push it to hub.docker
   - docker push fikircik/multi-docker-client
   - docker push fikircik/multi-docker-nginx
   - docker push fikircik/multi-docker-server
