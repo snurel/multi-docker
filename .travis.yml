@@ -10,18 +10,16 @@ before_install:
 script:
   - docker run -e CI=true 1154455/multi-docker npm test
 
-# after_success:
-  # - docker build -t fikircik/multi-docker-client ./client
-  # - docker build -t fikircik/multi-docker-nginx ./nginx
-  # - docker build -t fikircik/multi-docker-server ./server
-  # - docker build -t fikircik/multi-docker-worker ./worker
-  # Log in to the docker CLI
+after_success:
+  - docker build -t fikircik/multi-docker-client ./client
+  - docker build -t fikircik/multi-docker-nginx ./nginx
+  - docker build -t fikircik/multi-docker-server ./server
+  - docker build -t fikircik/multi-docker-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take those images and push them to docker hub
-  # - docker push fikircik/multi-docker-client
-  # - docker push fikircik/multi-docker-nginx
-  # - docker push fikircik/multi-docker-server
-  # - docker push fikircik/multi-docker-worker
+  - docker push fikircik/multi-docker-client
+  - docker push fikircik/multi-docker-nginx
+  - docker push fikircik/multi-docker-server
+  - docker push fikircik/multi-docker-worker
 
 #deploy:
 #  provider: elasticbeanstalk
